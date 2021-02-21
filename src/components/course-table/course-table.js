@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import CourseRow from "./course-row";
 import {Link} from "react-router-dom";
+import CourseCard from "../course-grid/course-card";
 
 function CourseTable(props) {
     return (
@@ -12,7 +13,7 @@ function CourseTable(props) {
                         <div className="d-none d-md-block col-md-2 col-lg-2">Owned By</div>
                         <div className="d-none d-md-block col-md-4 col-lg-3">Last modified by me</div>
                         <div className="col-4 text-center text-md-left col-sm-2 col-md-2 col-lg-2">
-                            <Link to="/courses/grid"><i className="fa fa-grip-horizontal mr-4"></i></Link>
+                            <Link to="/courses/grid"><i className="fa fa-folder mr-4"></i></Link>
                             <i className="fa fa-sort-alpha-down"></i>
                         </div>
                     </div>
@@ -20,7 +21,13 @@ function CourseTable(props) {
             </div>
             <div className="row list-content">
                 <div className="container">
-                    {props.courses.map(row => <CourseRow key={row._id} course={row} reload={props.reload}/>)}
+                    {props.courses.map(row =>
+                        <CourseRow
+                            key={row._id}
+                            course={row}
+                            reload={props.reload}
+                            updateCourse={props.updateCourse}
+                            deleteCourse={props.deleteCourse}/>)}
                 </div>
             </div>
         </div>

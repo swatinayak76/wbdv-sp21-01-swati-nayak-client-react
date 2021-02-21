@@ -3,6 +3,7 @@ import service from '../services/course-service';
 import CourseTable from "./course-table/course-table";
 import CourseGrid from "./course-grid/course-grid";
 import {Route, Link, Switch} from "react-router-dom";
+import courseService from "../services/course-service";
 
 function CourseManager() {
 
@@ -24,6 +25,20 @@ function CourseManager() {
     const reloadCourses = async () => {
         const data = await service.findAllCourses();
         setCourses(data);
+    }
+
+    const updateCourse = async course => {
+        const status = await courseService.updateCourse(course._id, course);
+        reloadCourses();
+        return status;
+    }
+
+    const deleteCourse = async id => {
+        if (window.confirm(`Are you sure you want to delete?`)) {
+            const status = await courseService.deleteCourse(id);
+            reloadCourses();
+            return status;
+        }
     }
 
     return (
@@ -48,10 +63,20 @@ function CourseManager() {
             <div className="row">
                 <div className="col">
                     <Route path="/courses/table" exact={true}>
-                        <CourseTable courses={courses} reload={reloadCourses}/>
+                        <CourseTable
+                            courses={courses}
+                            reload={reloadCourses}
+                            updateCourse={updateCourse}
+                            deleteCourse={deleteCourse}
+                        />
                     </Route>
                     <Route path="/courses/grid" exact={true}>
-                        <CourseGrid courses={courses} reload={reloadCourses}/>
+                        <CourseGrid
+                            courses={courses}
+                            reload={reloadCourses}
+                            updateCourse={updateCourse}
+                            deleteCourse={deleteCourse}
+                        />
                     </Route>
                 </div>
             </div>

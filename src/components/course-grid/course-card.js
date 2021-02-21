@@ -12,20 +12,15 @@ function CourseCard(props) {
             ...course,
             title: title
         }
-        const status = await courseService.updateCourse(editingId, obj);
+
+        const status = await props.updateCourse(obj);
         if (status === 200) {
             setEditingId(null);
-            props.reload();
         }
     }
 
     const handleDelete = async id => {
-        if (window.confirm(`Are you sure you want to delete?`)) {
-            const status = await courseService.deleteCourse(id);
-            if (status === 200) {
-                props.reload();
-            }
-        }
+        await props.deleteCourse(id);
     }
 
     return (
@@ -37,7 +32,7 @@ function CourseCard(props) {
                 <input type="text" className="form-control" onChange={e => setTitle(e.target.value)} value={title}/>}
                 <p>Some description</p>
                 <Link to="/editor" className="btn btn-primary">
-                    Go somewhere
+                    {props.course.title}
                 </Link>
                 {!editingId && <i className="fa fa-edit m-2" title="Edit" onClick={e => {
                     setTitle(props.course.title);

@@ -21,7 +21,13 @@ function CourseGrid(props) {
             </div>
             <div className="row list-content">
                 <div className="container course-grid">
-                    {props.courses.map(row => <CourseCard key={row._id} course={row} reload={props.reload}/>)}
+                    {props.courses.map(row =>
+                        <CourseCard
+                            key={row._id}
+                            course={row}
+                            reload={props.reload}
+                            updateCourse={props.updateCourse}
+                            deleteCourse={props.deleteCourse}/>)}
                 </div>
             </div>
         </div>
