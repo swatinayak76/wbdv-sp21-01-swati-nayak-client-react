@@ -14,6 +14,7 @@ function CourseGrid(props) {
                         <div className="d-none d-md-block col-md-4 col-lg-3"></div>
                         <div className="col-4 text-center text-md-left col-sm-2 col-md-2 col-lg-2">
                             <Link to="/courses/table"><i className="fa fa-list mr-4"></i></Link>
+                            <Link to="/courses/grid"><i className="fa fa-folder mr-4"></i></Link>
                             <i className="fa fa-sort-alpha-down"></i>
                         </div>
                     </div>
