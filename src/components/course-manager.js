@@ -5,6 +5,7 @@ import CourseGrid from "./course-grid/course-grid";
 import {Route, Link, Switch} from "react-router-dom";
 import courseService from "../services/course-service";
 
+//function CourseManager
 function CourseManager() {
 
     const [courses, setCourses] = useState([]);
