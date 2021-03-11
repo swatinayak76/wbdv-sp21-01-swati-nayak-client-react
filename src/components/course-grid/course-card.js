@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import courseService from "../../services/course-service";
 import imgSrc from '../../images/bootstrap-logo.png';
 
 function CourseCard(props) {
     const [editingId, setEditingId] = useState(null);
     const [title, setTitle] = useState('');
-
+    const history=useHistory();
     const handleSave = async course => {
         const obj = {
             ...course,
@@ -31,9 +31,9 @@ function CourseCard(props) {
                 {editingId &&
                 <input type="text" className="form-control" onChange={e => setTitle(e.target.value)} value={title}/>}
                 <p>Some description</p>
-                <Link to="/editor" className="btn btn-primary">
+                <a  onClick={()=>history.push("/editor",{course:props.course})} className="btn btn-primary">
                     {props.course.title}
-                </Link>
+                </a>
                 {!editingId && <i className="fa fa-edit m-2" title="Edit" onClick={e => {
                     setTitle(props.course.title);
                     setEditingId(props.course._id)

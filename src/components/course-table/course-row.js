@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import courseService from '../../services/course-service';
-import {Link} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
 
 function CourseRow(props) {
 
     const [editingId, setEditingId] = useState(null);
     const [title, setTitle] = useState('');
-
+    const history=useHistory();
     const handleSave = async course => {
         const obj = {
             ...course,
@@ -26,10 +26,10 @@ function CourseRow(props) {
     return (
         <div className="row">
             <div className="col-10 col-md-5 col-lg-5">
-                {!editingId && <Link to="/editor" className="">
+                {!editingId && <a  onClick={()=>history.push("/editor",{course:props.course})}  className="">
                     <i className="fa fa-book mr-3 text-primary"></i>
                     {props.course.title}
-                </Link> }
+                </a> }
                 {editingId &&
                 <input type="text" className="form-control" onChange={e => setTitle(e.target.value)} value={title}/>}
             </div>

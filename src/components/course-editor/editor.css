@@ -194,3 +194,24 @@ input:checked + .slider:before {
         width:100%;
     }
 }
+.flex-editor-box
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-module
+{
+    background-color: white!important;
+    border-color: transparent!important;
+    color: #3e3e3e!important;
+}
+.edit-module:focus
+{
+    color:white;
+}
+.cl-white
+{
+    color: white!important;
+}
