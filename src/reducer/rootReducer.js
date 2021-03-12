@@ -3,6 +3,7 @@ import {combineReducers} from "redux";
 import {moduleReducer} from './module-reducer';
 import {lessonReducer,selectModule} from './lesson-reducer';
 import {topicReducer,selectLesson} from './topic-reducer';
+import { mIdReducer } from './module_reducer';
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -11,7 +12,8 @@ export const rootReducer = combineReducers({
   lessons:lessonReducer,
   selectModule:selectModule,
   topics:topicReducer,
-  selectLesson:selectLesson
+  selectLesson: selectLesson,
+  mId: mIdReducer,
 });
 
 const persistConfig={

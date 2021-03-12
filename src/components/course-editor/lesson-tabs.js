@@ -8,10 +8,14 @@ import lessonService from "../../services/lesson-service";
 import topicService from "../../services/topic-service";
 import { topicAction } from '../../reducer/topic-reducer'
 import { lessonAction } from '../../reducer/lesson-reducer'
+import localStorage from 'redux-persist/es/storage';
+import { useHistory } from 'react-router-dom';
 
 export default (props)=>{
     const location = useLocation();
     const dispatch = useDispatch();
+    const history = useHistory();
+    const modId = useSelector((state) => state.mId);
 
     const [modules, setmodules] = React.useState([]);
     const [editingId, setEditingId] = React.useState(null);
@@ -38,13 +42,15 @@ export default (props)=>{
         }
     }
     const handleCreate=async ()=>{
-        console.log(selectModule,"selecModule")
+        
         const data = await lessonService.createLesson(selectModule,{title:"New Lesson"});
         // if(data)
         {dispatch(lessonAction.CREATE_Lesson(data))}
 
     }
-    const hadndleSelect=(lesson)=>{
+    const hadndleSelect = (lesson) => {
+        
+        history.push(`/courses/table/edit/${props.course._id}/modules/${modId.mId}/lessons/${lesson._id}`,{course:props.course});
             let oldtopics = topicAction.FIND_TOPIC_FOR_LESSON(lesson._id);
         if (oldtopics.length <= 0) {
                 

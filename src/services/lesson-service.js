@@ -19,7 +19,7 @@ export default class {
 
     }
     static updateLesson = async (lessonId,lesson) => {
-        console.log(API+`lessons/${lessonId}`);
+        
         const response = await axios.put(API+`lessons/${lessonId}`,lesson);
         return response.status;
 

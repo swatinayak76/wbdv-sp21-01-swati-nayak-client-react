@@ -40,13 +40,12 @@ function selectCourse(event) {
 }
 
 function deleteCourse(event) {
-    console.log(event.target)
+    
     var deleteBtn = jQuery(event.target)
     var theClass = deleteBtn.attr("class")
     var theIndex = deleteBtn.attr("id")
     var theId = courses[theIndex]._id
-    console.log(theClass)
-    console.log(theIndex)
+    
 
     courseService.deleteCourse(theId)
         .then(function (status) {
@@ -80,7 +79,7 @@ function renderCourses(courses) {
 // renderCourses(courses)
 
 function updateCourse() {
-    console.log(selectedCourse)
+    
     selectedCourse.title = titleFld.val()
     selectedCourse.seats = $seatsFld.val()
     selectedCourse.semester = $semesterFld.val()

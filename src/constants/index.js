@@ -1,0 +1,1 @@
+export const courseConstants = { CREATE_COURSE: 'CREATE_COURSE', CUErr: 'CU_ERR', URErr: 'UR_ERR', ULErr: 'UL_ERR', UProfile: 'U_PROFILE', UData: 'U_DATA', UList: 'U_LIST', UListDel: 'U_LIST_DEL', UListUpt: 'U_LIST_UPT' };

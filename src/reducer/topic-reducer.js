@@ -30,7 +30,7 @@ export const topicReducer = (state = topics, action) => {
         case "DELETE_TOPIC":
             {
                 let filterData=state.filter(x=>x._id!=action.payload);
-                console.log(filterData,"filter");
+                
                 return [...filterData];
             }
         default:

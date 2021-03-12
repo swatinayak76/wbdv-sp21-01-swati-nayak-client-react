@@ -8,7 +8,7 @@ function CourseRow(props) {
     const [title, setTitle] = useState(props.x.title);
     const history=useHistory();
     React.useEffect(()=>{
-        console.log(props.selectedTopic,props.x._id)
+        
     })
     return (
        

@@ -37,7 +37,7 @@ export default (props)=>{
         }
     }
     const handleCreate=async ()=>{
-        console.log(selectLesson,"selectLesson")
+        
         const data = await topicService.createTopic(selectLesson,{title:"New Topic"});
             
         {dispatch(topicAction.CREATE_TOPIC(data))}

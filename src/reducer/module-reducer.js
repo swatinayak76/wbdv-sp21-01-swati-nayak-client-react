@@ -17,8 +17,7 @@ export const moduleReducer = (state = modules, action) => {
         case "UPDATE_MODULE":
             {
                 let foundModuleIndex=state.map(x=>x._id).indexOf(action.payload._id)
-                console.log(state,"sdsds")
-                console.log(foundModuleIndex,"sdsds")
+                
 
                 if(foundModuleIndex!=-1)
                 {
@@ -34,7 +33,7 @@ export const moduleReducer = (state = modules, action) => {
                 let filterModule=oldState.filter(x=>x._id!=action.payload);
             
                 return [...filterModule];
-            }
+            }        
         default:
             return state
     }

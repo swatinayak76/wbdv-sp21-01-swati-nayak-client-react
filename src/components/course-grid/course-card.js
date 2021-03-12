@@ -31,7 +31,7 @@ function CourseCard(props) {
                 {editingId &&
                 <input type="text" className="form-control" onChange={e => setTitle(e.target.value)} value={title}/>}
                 <p>Some description</p>
-                <a  onClick={()=>history.push("/editor",{course:props.course})} className="btn btn-primary">
+                <a  onClick={()=>history.push(`/courses/grid/edit/${props.course._id}`,{course:props.course})} className="btn btn-primary">
                     {props.course.title}
                 </a>
                 {!editingId && <i className="fa fa-edit m-2" title="Edit" onClick={e => {

@@ -7,10 +7,13 @@ import { moduleActions } from '../../reducer/module-reducer'
 import { lessonAction } from '../../reducer/lesson-reducer'
 import ModuleRow from '../course-table/module-row'
 import topicService from "../../services/topic-service";
-import { topicAction } from '../../reducer/topic-reducer'
-export default ()=>{
+import { topicAction } from '../../reducer/topic-reducer';
+import { useHistory } from 'react-router-dom';
+
+export default (props)=>{
     const location = useLocation();
     const dispatch = useDispatch();
+    const history=useHistory();
 
     const [modules, setmodules] = React.useState([]);
     const [editingId, setEditingId] = React.useState(null);
@@ -73,7 +76,7 @@ export default ()=>{
         if(status==200)
         {
            dispatch( moduleActions.DELETE_MODULE(id));
-            console.log(modouleReducer)
+            
             // setmodules()
         }
     }
@@ -82,7 +85,9 @@ export default ()=>{
         if(data)
         {dispatch(moduleActions.CREATE_MODULE(data))}
     }
-    const hadndleSelect=(module)=>{
+    const hadndleSelect = (module) => {
+        dispatch({ type: 'SetMId', payload: module._id });
+        history.push(`/courses/table/edit/${props.course._id}/modules/${module._id}`,{course:props.course});        
         let oldlessons = lessonAction.FIND_Lesson_FOR_Modlue(module._id);
         if (oldlessons.length <= 0) {
                 

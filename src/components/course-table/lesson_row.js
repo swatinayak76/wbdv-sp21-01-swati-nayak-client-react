@@ -9,7 +9,7 @@ function CourseRow(props) {
     const history=useHistory();
     const selectModuleValue=useSelector(x=>x.selectLesson);
     useEffect(()=>{
-        console.log(props.x._id,selectModuleValue)
+        
     })
     return (
        

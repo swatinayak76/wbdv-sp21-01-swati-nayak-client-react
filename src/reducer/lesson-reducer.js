@@ -30,7 +30,7 @@ export const lessonReducer = (state = lessons, action) => {
         case "DELETE_Lesson":
             {
                 let filterData=state.filter(x=>x._id!=action.payload);
-                console.log(filterData,"filter");
+                
                 return [...filterData];
             }
         default:
