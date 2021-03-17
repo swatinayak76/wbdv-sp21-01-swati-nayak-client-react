@@ -42,5 +42,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swatinayak76/wbdv-sp21-01-swati-nayak-client-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swatinayak76/wbdv-sp21-01-swati-nayak-client-react/issues"
+  },
+  "homepage": "https://github.com/swatinayak76/wbdv-sp21-01-swati-nayak-client-react#readme",
+  "description": ""
 }

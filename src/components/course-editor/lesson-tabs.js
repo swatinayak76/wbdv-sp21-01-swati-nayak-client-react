@@ -37,7 +37,8 @@ export default (props)=>{
         const status = await lessonService.deletelesson(id);
         if(status==200)
         {
-           dispatch( lessonAction.DELETE_Lesson(id));
+            dispatch(lessonAction.DELETE_Lesson(id));
+            dispatch(topicAction.SET_TOPIC([]));
             // setmodules()
         }
     }
