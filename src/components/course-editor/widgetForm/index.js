@@ -1,4 +1,6 @@
 import React from "react";
+import HeadingWidget from "../../widgets/heading-widget";
+import ParagraphWidget from "../../widgets/paragraph-widget";
 
 const WidgetForm = ({
   setWidgetForm,
@@ -14,12 +16,12 @@ const WidgetForm = ({
         </div>
         <div className="col-md-6 order-1 order-md-2">
           <div className="row text-center justify-content-end">
-            <div className=" btn-up bg-warning ml-2">
+            {/* <div className=" btn-up bg-warning ml-2">
               <i className="fas fa-arrow-up"></i>
             </div>
             <div className=" btn-down bg-warning ml-2">
               <i className="fas fa-arrow-down"></i>
-            </div>
+            </div> */}
             <select
               className="form-control custom-select txt-role ml-2"
               id="role"
@@ -33,52 +35,17 @@ const WidgetForm = ({
           </div>
         </div>
         {widget.type === "Heading" ? (
-          <>
-            <div className="col-md-12 mt-2 order-3">
-              <div className="form-group">
-                <input
-                  className="form-control"
-                  name="text"
-                  value={widget.text}
-                  placeholder="heading text"
-                  onChange={handleWidgetFormFields}
-                />
-              </div>
-            </div>
-            <div className="col-md-12 order-4">
-              <div className="form-group">
-                <select
-                  className="form-control custom-select"
-                  name="style"
-                  onChange={handleWidgetFormFields}
-                >
-                  <option value="h1" selected>
-                    Heading 1
-                  </option>
-                  <option value="h2">Heading 2</option>
-                  <option value="h3">Heading 3</option>
-                  <option value="h4">Heading 4</option>
-                  <option value="h5">Heading 5</option>
-                  <option value="h6">Heading 6</option>
-                </select>
-              </div>
-            </div>
-          </>
+          <HeadingWidget
+            widget={widget}
+            handleWidgetFormFields={handleWidgetFormFields}
+          />
         ) : null}
 
         {widget.type === "Paragraph" ? (
-          <div className="col-md-12 order-4">
-            <div className="form-group">
-              <textarea
-                className="form-control"
-                name="value"
-                value={widget.value}
-                placeholder="Paragraph text"
-                onChange={handleWidgetFormFields}
-                style={{ marginTop: "10px" }}
-              />
-            </div>
-          </div>
+          <ParagraphWidget
+            widget={widget}
+            handleWidgetFormFields={handleWidgetFormFields}
+          />
         ) : null}
 
         <div className="col-md-12 order-5">

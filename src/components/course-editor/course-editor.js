@@ -8,7 +8,7 @@ import {
   deleteWidget,
   updateWidget,
 } from "../../services/widget-service";
-import ShowWidgets from "../show-widgets";
+import WidgetList from "../widgets/widget-list";
 // import { useDispatch, useSelector } from "react-redux";
 // import moduleService from "../../services/module-service";
 // import { moduleActions } from "../../reducer/module-reducer";
@@ -25,13 +25,14 @@ function CourseEditor(props) {
   const topicReducer = useSelector((x) => x.topics);
   const _widgetReducer = useSelector((state) => state.widgetReducer);
   const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedWidget, setSelectedWidget] = useState("");
   const [widgetForm, setWidgetForm] = useState(false);
   const [widgetFormEdit, setWidgetFormEdit] = useState(false);
   const [editingWidget, setEditingWidget] = useState({});
   const [widget, setWidget] = useState({
     name: "",
     type: "Heading",
-    widgetOrder: "1",
+    widgetOrder: 1,
     text: "",
     src: "Heading source",
     size: "500",
@@ -57,7 +58,7 @@ function CourseEditor(props) {
     dispatch(findWidgetsForTopic(tId));
   };
 
-  const handleWidgetFormFields = ({ target }) => {    
+  const handleWidgetFormFields = ({ target }) => {
     setWidget({ ...widget, [target.name]: target.value, tid: selectedTopic });
   };
 
@@ -69,7 +70,7 @@ function CourseEditor(props) {
     setWidget({
       name: "",
       type: "Heading",
-      widgetOrder: "1",
+      widgetOrder: 1,
       text: "",
       src: "Heading source",
       size: "500",
@@ -136,11 +137,11 @@ function CourseEditor(props) {
             <div>
               {topicReducer.length > 0 ? (
                 <div style={{ display: "flex" }}>
-                  <h1>Widget List ({_widgetReducer.data.length})</h1>
+                  <h1>Widget List ({_widgetReducer.data.length})</h1>                  
                   <i
                     style={{
                       fontSize: "32px",
-                      width: "70%",
+                      marginLeft: "600px",
                       textAlign: "right",
                     }}
                     onClick={() => setWidgetForm(true)}
@@ -166,16 +167,15 @@ function CourseEditor(props) {
                   handleEditingWidgetFormFields={handleEditingWidgetFormFields}
                 />
               ) : null}
-              <ShowWidgets
+              <WidgetList
                 widgets={_widgetReducer.data}
-                selectedTopic={selectedTopic}                
+                setSelectedWidget={setSelectedWidget}
+                selectedWidget={selectedWidget}
+                selectedTopic={selectedTopic}
                 handleWidgetEditing={handleWidgetEditing}
               />
             </div>
-          </div>
-          {/* <div className="btn-plus bg-danger">            
-            <i className="fas fa-plus-circle"></i>
-          </div> */}
+          </div>          
         </div>
       </div>
     </div>
