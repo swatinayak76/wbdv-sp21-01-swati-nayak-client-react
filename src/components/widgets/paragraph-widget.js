@@ -6,8 +6,8 @@ const paragraphwidget = ({ widget, handleWidgetFormFields }) => {
       <div className="form-group">
         <textarea
           className="form-control"
-          name="value"
-          value={widget.value}
+          name="text"
+          value={widget.text}
           placeholder="Paragraph text"
           onChange={handleWidgetFormFields}
           style={{ marginTop: "10px" }}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 
-// a little function to help us with reordering the result widget list.
+// a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -32,10 +32,18 @@ const getListStyle = (isDraggingOver) => ({
   width: 950,
 });
 
-const ShowWidgets = ({ widgets, handleWidgetEditing }) => {
+const ShowWidgets = ({ widgets, handleWidgetEditing }) => {  
   const [widgetArr, setWidgetArr] = useState(widgets);
 
   useEffect(() => {
+    for (var i = 0; i < widgets.length; i++) {
+      if (widgets[i].type === "List") {
+        if (typeof widgets[i].text === "string") {
+          var list = widgets[i].text.split("\n");
+          widgets[i].text = list;
+        }
+      }
+    }
     setWidgetArr(widgets);
   }, [widgets]);
 
@@ -89,8 +97,34 @@ const ShowWidgets = ({ widgets, handleWidgetEditing }) => {
                               onClick={() => handleWidgetEditing(item)}
                             ></i>
                           </div>
-                          <h1>{item.text}</h1>
-                          <p>{item.value}</p>
+                          {item.type === "Heading" ? (
+                            <h1>{item.text}</h1>
+                          ) : null}
+                          {item.type === "Paragraph" ? (
+                            <p>{item.text}</p>
+                          ) : null}
+                          {item.type === "List" ? (
+                            item.widgetOrder ? (
+                              <ol>
+                                {item.text.map((item, i) => (
+                                  <li key={i}>{item}</li>
+                                ))}
+                              </ol>
+                            ) : (
+                              <ul>
+                                {item.text.map((item, i) => (
+                                  <li key={i}>{item}</li>
+                                ))}
+                              </ul>
+                            )
+                          ) : null}
+                          {item.type === "Image" ? (
+                            <img
+                              src={item.src}
+                              width={item.width}
+                              height={item.height}
+                            />
+                          ) : null}
                         </div>
                       </div>
                     )}

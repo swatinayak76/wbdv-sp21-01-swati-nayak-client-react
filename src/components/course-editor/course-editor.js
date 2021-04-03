@@ -32,15 +32,15 @@ function CourseEditor(props) {
   const [widget, setWidget] = useState({
     name: "",
     type: "Heading",
-    widgetOrder: 1,
-    text: "",
-    src: "Heading source",
+    widgetOrder: 0,
+    text: "Text",
+    src: "image sorse",
     size: "500",
-    width: "250",
-    height: "257",
+    width: "200",
+    height: "200",
     cssClass: "center",
     style: "h1",
-    value: "",
+    value: "value",
   });
 
   const history = useHistory();
@@ -62,6 +62,22 @@ function CourseEditor(props) {
     setWidget({ ...widget, [target.name]: target.value, tid: selectedTopic });
   };
 
+  const handleOrderField = (v) => {
+    if (v === 1) {      
+      setWidget({ ...widget, widgetOrder: 0, tid: selectedTopic });      
+    } else {
+      setWidget({ ...widget, widgetOrder: 1, tid: selectedTopic });      
+    }
+  };
+
+  const handleEditOrderField = (v) => {
+    if (v === 1) {      
+      setEditingWidget({ ...editingWidget, text: editingWidget.text.toString().replace(new RegExp(",", "g"), "\n"), widgetOrder: 0, tid: selectedTopic });      
+    } else {
+      setEditingWidget({ ...editingWidget, text: editingWidget.text.toString().replace(new RegExp(",", "g"), "\n"), widgetOrder: 1, tid: selectedTopic });      
+    }          
+  };
+
   const handleEditingWidgetFormFields = ({ target }) => {
     setEditingWidget({ ...editingWidget, [target.name]: target.value });
   };
@@ -70,15 +86,15 @@ function CourseEditor(props) {
     setWidget({
       name: "",
       type: "Heading",
-      widgetOrder: 1,
-      text: "",
-      src: "Heading source",
+      widgetOrder: 0,
+      text: "text",
+      src: "image sorse",
       size: "500",
-      width: "250",
-      height: "257",
+      width: "200",
+      height: "200",
       cssClass: "center",
       style: "h1",
-      value: "",
+      value: "value",
     });
     dispatch(createWidget(widget, selectedTopic));
     setWidgetForm(false);
@@ -86,6 +102,7 @@ function CourseEditor(props) {
 
   const update_Widget = () => {
     dispatch(updateWidget(editingWidget));
+    console.log(editingWidget);
     setWidgetFormEdit(false);
   };
 
@@ -155,12 +172,14 @@ function CourseEditor(props) {
                   widget={widget}
                   saveWidget={saveWidget}
                   handleWidgetFormFields={handleWidgetFormFields}
+                  handleOrderField={handleOrderField}
                 />
               ) : null}
 
               {widgetFormEdit ? (
                 <WidgetFormEdit
                   editingWidget={editingWidget}
+                  handleEditOrderField={handleEditOrderField}
                   setWidgetFormEdit={setWidgetFormEdit}
                   updateWidget={update_Widget}
                   deleteWidget={deleteWidget}

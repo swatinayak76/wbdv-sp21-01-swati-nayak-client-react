@@ -1,5 +1,7 @@
 import React from "react";
 import HeadingWidget from "../../widgets/heading-widget";
+import ImageWidget from "../../widgets/image-widget";
+import ListWidget from "../../widgets/list-widget";
 import ParagraphWidget from "../../widgets/paragraph-widget";
 
 const WidgetForm = ({
@@ -7,6 +9,7 @@ const WidgetForm = ({
   widget,
   handleWidgetFormFields,
   saveWidget,
+  handleOrderField,
 }) => {
   return (
     <>
@@ -31,6 +34,8 @@ const WidgetForm = ({
             >
               <option value="Heading">Heading</option>
               <option value="Paragraph">Paragraph</option>
+              <option value="List">List</option>
+              <option value="Image">Image</option>
             </select>
           </div>
         </div>
@@ -43,6 +48,21 @@ const WidgetForm = ({
 
         {widget.type === "Paragraph" ? (
           <ParagraphWidget
+            widget={widget}
+            handleWidgetFormFields={handleWidgetFormFields}
+          />
+        ) : null}
+
+        {widget.type === "List" ? (
+          <ListWidget
+            widget={widget}
+            handleOrderField={handleOrderField}
+            handleWidgetFormFields={handleWidgetFormFields}
+          />
+        ) : null}
+
+        {widget.type === "Image" ? (
+          <ImageWidget
             widget={widget}
             handleWidgetFormFields={handleWidgetFormFields}
           />

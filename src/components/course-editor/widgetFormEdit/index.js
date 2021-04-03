@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 
 const WidgetForm = ({
   editingWidget,
+  handleEditOrderField,
   setWidgetFormEdit,
   handleEditingWidgetFormFields,
   updateWidget,
@@ -43,12 +44,32 @@ const WidgetForm = ({
                 <>
                   <option value="Heading">Heading</option>
                   <option value="Paragraph">Paragraph</option>
+                  <option value="List">List</option>
+                  <option value="Image">Image</option>
                 </>
               ) : null}
               {editingWidget.type === "Paragraph" ? (
                 <>
                   <option value="Paragraph">Paragraph</option>
                   <option value="Heading">Heading</option>
+                  <option value="List">List</option>
+                  <option value="Image">Image</option>
+                </>
+              ) : null}
+              {editingWidget.type === "List" ? (
+                <>
+                  <option value="List">List</option>
+                  <option value="Heading">Heading</option>
+                  <option value="Paragraph">Paragraph</option>
+                  <option value="Image">Image</option>
+                </>
+              ) : null}
+              {editingWidget.type === "Image" ? (
+                <>
+                  <option value="Image">Image</option>
+                  <option value="Heading">Heading</option>
+                  <option value="Paragraph">Paragraph</option>
+                  <option value="List">List</option>
                 </>
               ) : null}
             </select>
@@ -103,6 +124,76 @@ const WidgetForm = ({
           </div>
         ) : null}
 
+        {editingWidget.type === "List" ? (
+          <div className="col-md-12 order-4">
+            <div className="checkbox" style={{ fontSize: "20px" }}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={editingWidget.widgetOrder}
+                  onChange={() =>
+                    handleEditOrderField(editingWidget.widgetOrder)
+                  }
+                  style={{ width: "20px", height: "20px" }}
+                />
+                &nbsp;&nbsp;Ordered
+              </label>
+            </div>
+
+            <div className="form-group">
+              <textarea
+                className="form-control"
+                name="text"
+                value={editingWidget.text
+                  .toString()
+                  .replace(new RegExp(",", "g"), "\n")}
+                rows="5"
+                placeholder="There are two types of lists: ordered and unordered. select the type of list by checking the ordered checkbox"
+                onChange={handleEditingWidgetFormFields}
+                style={{ marginTop: "10px" }}
+              />
+            </div>
+          </div>
+        ) : null}
+
+        {editingWidget.type === "Image" ? (
+          <>
+            <div className="col-md-12 mt-2 order-3">
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  name="src"
+                  value={editingWidget.src}
+                  onChange={handleEditingWidgetFormFields}
+                  placeholder="Image URL"
+                />
+              </div>
+            </div>
+            <div className="col-md-12 mt-2 order-3">
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  name="width"
+                  value={editingWidget.width}
+                  onChange={handleEditingWidgetFormFields}
+                  placeholder="Image width"
+                />
+              </div>
+            </div>
+            <div className="col-md-12 mt-2 order-3">
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  name="height"
+                  value={editingWidget.height}
+                  onChange={handleEditingWidgetFormFields}
+                  placeholder="Image height"
+                />
+              </div>
+            </div>
+          </>
+        ) : null}
+
         <div className="col-md-12 order-5">
           <div className="form-group">
             <input
@@ -137,11 +228,6 @@ const WidgetForm = ({
           >
             Cancel
           </button>
-          {/* <label>Preview</label>
-          <label className="switch">
-            <input type="checkbox" />
-            <span className="slider round"></span>
-          </label> */}
         </div>
       </div>
     </>
