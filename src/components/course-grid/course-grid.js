@@ -48,6 +48,7 @@ function CourseGrid(props) {
         <div className="d-none d-md-block col-md-3 col-lg-2  text-course-manager">
           <p className="m-0">Course Manager</p>
         </div>
+      
         <div className="col-8 col-md-6 col-lg-7">
           <input
             type="text"
@@ -74,6 +75,7 @@ function CourseGrid(props) {
                   <div className="d-none d-md-block col-md-2 col-lg-2">
                     Owned by me
                   </div>
+                
                   <div className="d-none d-md-block col-md-4 col-lg-3"></div>
                   <div className="col-4 text-center text-md-left col-sm-2 col-md-2 col-lg-2">
                     <Link to="/courses/table">

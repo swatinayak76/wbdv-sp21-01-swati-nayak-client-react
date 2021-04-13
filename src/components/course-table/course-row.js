@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import courseService from '../../services/course-service';
 import {Link,useHistory} from "react-router-dom";
-
+// import {Link} from 'react-router-dom'
 function CourseRow(props) {
 
     const [editingId, setEditingId] = useState(null);
@@ -33,16 +33,23 @@ function CourseRow(props) {
 
     return (
         <div className="row">
-            <div className="col-10 col-md-5 col-lg-5">
+            <div className="col-8 col-md-3 col-lg-3">
                 {!editingId && <a  onClick={()=>history.push(`/courses/table/edit/${props.course._id}`,{course:props.course})}  className="">
                     <i className="fa fa-book mr-3 text-primary"></i>
                     {props.course.title}
                 </a> }
                 {editingId &&
-                <input type="text" className="form-control" onChange={e => setTitle(e.target.value)} value={title}/>}
+                <input type="text" className="form-control" onChange={e => setTitle(e.target.value)} value={title}/>
+                }
             </div>
+            {/* <div className="d-none d-md-block col-md-2 col-lg-2">Quizzes</div> */}
+            <div className=" d-md-block col-md-2 col-lg-2">
+                <Link to="/quiz">Quizzes</Link>
+            </div>
+
             <div className="d-none d-md-block col-md-2 col-lg-2">me</div>
             <div className="d-none d-md-block col-md-4 col-lg-3">{props.course._updatedAt}</div>
+            
             <div className="col-2 text-right col-sm-2 col-md-1 col-lg-2">
                 {!editingId && <i className="fa fa-edit mr-4" title="Edit" onClick={() => handleEdit()}></i>}
                 {editingId &&

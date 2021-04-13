@@ -23,6 +23,7 @@ export default class {
         const response = await axios.post(API, course);
     }
 
+   
     static findAllCourses = async () => {
         const response = await axios.get(API);
         return response.data;

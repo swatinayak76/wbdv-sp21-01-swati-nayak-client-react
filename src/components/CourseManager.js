@@ -24,6 +24,7 @@ function CourseManager() {
     const reloadCourses = async () => {
         const data = await service.findAllCourses();
         setCourses(data);
+        console.log(data)
     }
 
     return (
@@ -50,6 +51,7 @@ function CourseManager() {
                     <Route path="/courses/table" exact={true}>
                         <CourseTable courses={courses} reload={reloadCourses}/>
                     </Route>
+                  
                     <Route path="/courses/grid" exact={true}>
                         <CourseGrid courses={courses} reload={reloadCourses}/>
                     </Route>

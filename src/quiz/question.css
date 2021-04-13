@@ -1,0 +1,42 @@
+.radiocontainer {
+    background-color: #f1f1f1;
+    display: block;
+    position: relative;
+    padding: 10px 10px 10px 50px;
+    margin-bottom: 1px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    word-wrap: break-word;
+    text-transform: capitalize;
+}
+.radiocontainer input {
+    position: absolute;
+    top: 20px;
+         
+    left: 15px;
+    cursor: pointer;
+}
+
+.correct{
+    background-color: rgba(200, 247, 197, 1)!important;
+    background-image: url('./Flat_tick_icon.svg.png');
+     background-position: right; 
+     background-size: 30px 30px ;
+     background-repeat: no-repeat !important;
+     padding-right: 10px;
+     
+}
+
+.incorrect{
+    background-color: rgb(255,0,0 ,0.3) !important;
+    background-image: url('./incorrecto-icono-png.png') !important;
+    background-position: right; 
+    background-size: 30px 30px ;
+    background-repeat: no-repeat !important;
+    padding-right: 10px;
+
+}
