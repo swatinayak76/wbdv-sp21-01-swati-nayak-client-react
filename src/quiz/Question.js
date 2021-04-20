@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./question.css";
 import axios from "axios";
 // import Questions from '../'
-import TrueFalse from './TrueFalse'
-
+import TrueFalse from "./TrueFalse";
 
 var currentCorrectInd = null;
 var currentIncorrectInd = null;
@@ -28,8 +27,9 @@ const Questions = (props) => {
 
   const [state, setstate] = useState([]);
   useEffect(() => {
-    axios.get(`/get_quiz/${props.match.params.quizId}`).then((res) => {
+    axios.get(`/api/quizzes/${props.match.params.quizId}`).then((res) => {
       if (res.status == 200) {
+        console.log(res.data);
         setstate(res.data);
       }
       console.log(state);
@@ -51,6 +51,16 @@ const Questions = (props) => {
     console.log(check);
   };
 
+  const submitQuiz = (quizId, questions) => {
+
+    axios.post(`/api/quizzes/${quizId}/attempts`, questions).then((res) => {
+      if (res.status == 200) {
+        console.log(res.data);
+      }
+      console.log(state);
+    });
+  };
+
   return (
     <div className="container">
       <div
@@ -59,11 +69,15 @@ const Questions = (props) => {
       >
         <h1>{props.match.params.title}</h1>
       </div>
-      {state &&
-        state.map((item, index) => {
+      {state.questions &&
+        state.questions.map((item, index) => {
           if (item.type == "MULTIPLE_CHOICE") {
             return (
-              <div style={{ marginBottom: "50px" }} id="quizcontainer">
+              <div
+                style={{ marginBottom: "50px" }}
+                id="quizcontainer"
+                index={index}
+              >
                 <p id="qtext">{item.question}</p>
                 <form
                   role="form"
@@ -129,10 +143,9 @@ const Questions = (props) => {
                                 value={choices}
                                 onChange={(e) => {
                                   console.log(e.target.value);
-                             
+
                                   setResult({ correct: e.target.value });
                                   currentIncorrectInd = ind;
- 
                                 }}
                               />
                               <span class="checkmark"></span>
@@ -156,16 +169,17 @@ const Questions = (props) => {
                           disable: true,
                           incorectInd: currentIncorrectInd,
                         });
+                        submitQuiz(state._id, state.questions);
                       }}
                     >
-                      Grade
+                      Submit
                     </button>
                   </div>
                 </form>
               </div>
             );
           } else {
-            return <TrueFalse item={item} index={index} /> 
+            return <TrueFalse item={item} index={index} submitQuiz={submitQuiz} questions={state.questions}/>;
           }
         })}
     </div>

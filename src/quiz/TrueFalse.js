@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 var currentCorrectInd = null;
 var currentIncorrectInd = null;
-const Questions = ({ item, index }) => {
+const Questions = ({ item, index,submitQuiz,questions }) => {
   let [myAns, setMyAns] = useState(undefined);
   let [isDisable, setDisable] = useState(null);
   let [isAnsCorrect, setAnsCorrect] = useState(null);
@@ -87,16 +87,17 @@ const Questions = ({ item, index }) => {
           <p>Your Answer:  {result.correct ? result.correct : result.correct}{" "} </p>
           <button 
            onClick={() => {
-             console.log(item.correct);
+             console.log(item);
             setResult({
               ...result,
               ind: currentCorrectInd,
               disable: true,
               incorectInd: currentIncorrectInd,
             });
+            submitQuiz(item._id, questions);
           }}
            type="button" class="btn btn-success">
-            Grade
+            Submit
           </button>
         </div>
       </form>

@@ -10,14 +10,14 @@ const AllQuizzes = ()=>{
 
     useEffect(()=>{
     
-      axios.get("/getallquizzes").then(res=>{
+      axios.get("/api/getallquizzes").then(res=>{
  
         if(res.status == 200){
       
+          console.log(state)
           setstate(res.data)
       
       }
-      console.log(state)
        })
       
     }, [])
