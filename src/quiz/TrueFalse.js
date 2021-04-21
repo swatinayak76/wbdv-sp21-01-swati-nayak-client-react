@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 var currentCorrectInd = null;
 var currentIncorrectInd = null;
-const Questions = ({ item, index,submitQuiz,questions }) => {
+const Questions = ({ item, index, submitQuiz, questions }) => {
   let [myAns, setMyAns] = useState(undefined);
   let [isDisable, setDisable] = useState(null);
   let [isAnsCorrect, setAnsCorrect] = useState(null);
@@ -36,8 +36,6 @@ const Questions = ({ item, index,submitQuiz,questions }) => {
               }
               return (
                 <label
-                  // className={"radiocontainer"}
-
                   className={
                     ind == result.ind
                       ? "correct radiocontainer"
@@ -56,8 +54,6 @@ const Questions = ({ item, index,submitQuiz,questions }) => {
                     onclick="clickRadio(this)"
                     value={choice}
                     onChange={(e) => {
-                      console.log(e.target.value);
-
                       setResult({ correct: e.target.value });
                       currentIncorrectInd = ind;
                     }}
@@ -66,37 +62,27 @@ const Questions = ({ item, index,submitQuiz,questions }) => {
                 </label>
               );
             })}
-            {/* <label className={"radiocontainer"} id={item._id} ref={inputTrue}>
-            True
-              <input
-              type="radio"
-              name={item._id}
-                id="1"
-                onclick="clickRadio(this)"
-                value="true"
-                onChange={(e) => {
-                  setMyAns(e.target.value);
-                }}
-                disabled={isDisable}
-              />
-              <span class="checkmark"></span>
-            </label> */}
           </div>
         </div>
         <div id="answerbuttoncontainer">
-          <p>Your Answer:  {result.correct ? result.correct : result.correct}{" "} </p>
-          <button 
-           onClick={() => {
-             console.log(item);
-            setResult({
-              ...result,
-              ind: currentCorrectInd,
-              disable: true,
-              incorectInd: currentIncorrectInd,
-            });
-            submitQuiz(item._id, questions);
-          }}
-           type="button" class="btn btn-success">
+          <p>
+            Your Answer: {result.correct ? result.correct : result.correct}{" "}
+          </p>
+          <button
+            onClick={() => {
+              setResult({
+                ...result,
+                ind: currentCorrectInd,
+                disable: true,
+                incorectInd: currentIncorrectInd,
+              });
+              let ans = questions.filter((q) => q._id == item._id);
+              ans[0].answer = result.correct;
+              submitQuiz(item._id, questions);
+            }}
+            type="button"
+            class="btn btn-success"
+          >
             Submit
           </button>
         </div>

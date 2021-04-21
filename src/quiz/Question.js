@@ -15,7 +15,7 @@ const Questions = (props) => {
     ans: null,
     disable: false,
   });
-  const [isTrueArr, setISTrue] = useState([]);
+  const [score, setScore] = useState(0);
 
   const [result, setResult] = useState({
     classdone: false,
@@ -29,10 +29,8 @@ const Questions = (props) => {
   useEffect(() => {
     axios.get(`/api/quizzes/${props.match.params.quizId}`).then((res) => {
       if (res.status == 200) {
-        console.log(res.data);
         setstate(res.data);
       }
-      console.log(state);
     });
   }, []);
 
@@ -56,6 +54,7 @@ const Questions = (props) => {
     axios.post(`/api/quizzes/${quizId}/attempts`, questions).then((res) => {
       if (res.status == 200) {
         console.log(res.data);
+        setScore(res.data.score)
       }
       console.log(state);
     });
@@ -65,9 +64,10 @@ const Questions = (props) => {
     <div className="container">
       <div
         className="shadow-lg p-3 mb-5 bg-white rounded"
-        style={{ marginTop: "20px" }}
+        style={{ marginTop: "20px",display:'flex',alignItems:'center',justifyContent:'space-between' }}
       >
         <h1>{props.match.params.title}</h1>
+        <h2>Score: {parseInt(score)}</h2>
       </div>
       {state.questions &&
         state.questions.map((item, index) => {
@@ -169,6 +169,8 @@ const Questions = (props) => {
                           disable: true,
                           incorectInd: currentIncorrectInd,
                         });
+                        let ans = state.questions.filter(q=>q._id == item._id)
+                        ans[0].answer = result.correct
                         submitQuiz(state._id, state.questions);
                       }}
                     >
